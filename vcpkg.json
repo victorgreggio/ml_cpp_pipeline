@@ -1,0 +1,16 @@
+{
+  "dependencies": [
+    "armadillo",
+    "cli11",
+    "fmt",
+    "highfive",
+    "mlpack",
+    {
+      "name": "sqlpp11",
+      "features": [
+        "postgresql"
+      ]
+    },
+    "grpc"
+  ]
+}

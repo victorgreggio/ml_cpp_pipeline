@@ -61,5 +61,4 @@ build
 # Data files
 *.h5
 *.csv
-*.json
 *.hdf
