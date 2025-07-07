@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package iris;
+
+service IrisClassifier {
+  rpc Classify (ClassifyRequest) returns (ClassifyResponse) {}
+}
+
+message ClassifyRequest {
+    double petalLength = 1;
+    double petalWidth = 2;
+    double sepalLength = 3;
+    double sepalWidth = 4;
+}
+
+message ClassifyResponse {
+  string specie = 1;
+}
