@@ -13,7 +13,7 @@ jobs:
 
     steps:
     - name: Checkout repository
-      uses: actions/checkout@latest
+      uses: actions/checkout@v4
     - name: Install CMake 3.27 and Ninja
       uses: lukka/get-cmake@latest
     - name: Setup anew (or from cache) vcpkg (and does not build any package)
