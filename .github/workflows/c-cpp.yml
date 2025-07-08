@@ -15,7 +15,7 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v4
     - name: Install CMake 3.27 and Ninja
-      uses: lukka/get-cmake@4.0.3
+      uses: lukka/get-cmake@latest
     - name: Setup anew (or from cache) vcpkg (and does not build any package)
       uses: lukka/run-vcpkg@11.5
     - name: Run CMake consuming CMakePreset.json and run vcpkg to build packages
