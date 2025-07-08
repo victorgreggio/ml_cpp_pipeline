@@ -2,10 +2,46 @@
   "version": 2,
   "configurePresets": [
     {
-      "name": "vcpkg",
+      "name": "VS16D",
+      "displayName": "Visual Studio 2019 - Debug",
+      "description": "Sets MSVS 2019 generator, compilers, build and install directory, debug build type",
       "generator": "Visual Studio 16 2019",
-      "binaryDir": "${sourceDir}/build",
+      "binaryDir": "${sourceDir}/build/${presetName}",
       "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug",
+        "CMAKE_TOOLCHAIN_FILE": "$env{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake"
+      }
+    },
+    {
+      "name": "VS16R",
+      "displayName": "Visual Studio 2019 - Release",
+      "description": "Sets MSVS 2019 generator, compilers, build and install directory, release build type",
+      "generator": "Visual Studio 16 2019",
+      "binaryDir": "${sourceDir}/build/${presetName}",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Release",
+        "CMAKE_TOOLCHAIN_FILE": "$env{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake"
+      }
+    },
+    {
+      "name": "VS17D",
+      "displayName": "Visual Studio 2022 - Debug",
+      "description": "Sets MSVS 2022 generator, compilers, build and install directory, debug build type",
+      "generator": "Visual Studio 17 2022",
+      "binaryDir": "${sourceDir}/build/${presetName}",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug",
+        "CMAKE_TOOLCHAIN_FILE": "$env{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake"
+      }
+    },
+    {
+      "name": "VS17R",
+      "displayName": "Visual Studio 2022 - Release",
+      "description": "Sets MSVS 2022 generator, compilers, build and install directory, release build type",
+      "generator": "Visual Studio 17 2022",
+      "binaryDir": "${sourceDir}/build/${presetName}",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Release",
         "CMAKE_TOOLCHAIN_FILE": "$env{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake"
       }
     }
