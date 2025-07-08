@@ -17,9 +17,9 @@ jobs:
     - name: Install CMake 3.27 and Ninja
       uses: lukka/get-cmake@latest
     - name: Setup anew (or from cache) vcpkg (and does not build any package)
-      uses: lukka/run-vcpkg@11.5
+      uses: lukka/run-vcpkg@v11
     - name: Run CMake consuming CMakePreset.json and run vcpkg to build packages
-      uses: lukka/run-cmake@10.8
+      uses: lukka/run-cmake@v10
       with:
         cmake-args: --preset CI
     
