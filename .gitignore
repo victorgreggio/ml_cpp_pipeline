@@ -59,6 +59,8 @@ build
 .vscode
 
 # Data files
-*.h5
-*.csv
-*.hdf
+data/*.h5
+data/*.csv
+data/*.hdf
+data/*.json
+data/*.xml

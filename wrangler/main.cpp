@@ -107,6 +107,9 @@ int main(int argc, char *argv[])
             csvWriter.endrow();
         }
         csvWriter.flush();
+
+        std::cout << "Data wrangling completed successfully. Output written to: " << outputPath << '\n';
+        return EXIT_SUCCESS;
     }
     catch (const std::exception &e)
     {
