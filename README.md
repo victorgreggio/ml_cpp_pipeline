@@ -63,8 +63,8 @@ This project showcases a simple end-to-end machine learning pipeline using C++ t
 These steps will walk you through configuring your local machine to build and run the project.
 
 ### Prerequisites
-* Visual Studio Build Tools
-* PostgreSQL
+* [Visual Studio Build Tools](https://aka.ms/vs/17/release/vs_BuildTools.exe)
+* [PostgreSQL](https://www.postgresql.org/download/)
   1. Download and install PostgreSQL.
   2. Using postgres or other admin account execute the script ```data\db.sql```
   3. Login using iris user and execute the other two scripts: ```data\ddl.sql``` and ```data\dml.sql```
