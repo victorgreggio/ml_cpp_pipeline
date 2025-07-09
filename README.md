@@ -46,8 +46,6 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![Product Name Screen Shot][product-screenshot]](https://github.com/victorgreggio/ml_cpp_pipeline)
-
 This project showcases a simple end-to-end machine learning pipeline using C++ tools/libraries. The core idea is to demonstrate how real-world data can be extracted from a database, processed, and used to train a classification model—all while navigating different data file formats and deploying the result as a service.
 
 * <b>Data Extraction</b> Data is initially fetched from a PostgreSQL database, simulating a typical structured source in enterprise environments.
@@ -65,8 +63,8 @@ This project showcases a simple end-to-end machine learning pipeline using C++ t
 These steps will walk you through configuring your local machine to build and run the project.
 
 ### Prerequisites
-* Visual Studio Build Tools
-* PostgreSQL
+* [Visual Studio Build Tools](https://aka.ms/vs/17/release/vs_BuildTools.exe)
+* [PostgreSQL](https://www.postgresql.org/download/)
   1. Download and install PostgreSQL.
   2. Using postgres or other admin account execute the script ```data\db.sql```
   3. Login using iris user and execute the other two scripts: ```data\ddl.sql``` and ```data\dml.sql```
