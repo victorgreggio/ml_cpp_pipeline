@@ -46,8 +46,6 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![Product Name Screen Shot][product-screenshot]](https://github.com/victorgreggio/ml_cpp_pipeline)
-
 This project showcases a simple end-to-end machine learning pipeline using C++ tools/libraries. The core idea is to demonstrate how real-world data can be extracted from a database, processed, and used to train a classification model—all while navigating different data file formats and deploying the result as a service.
 
 * <b>Data Extraction</b> Data is initially fetched from a PostgreSQL database, simulating a typical structured source in enterprise environments.
