@@ -34,9 +34,8 @@ if (-not (Test-Path $cmakePath)) {
 # Define the path to the VCPKG executable
 if ($buildToolsVersion -ge "17.0") {
     # For Visual Studio 2022 and later, VCPKG is included with the Build Tools
-    $vcpkgPath = Join-Path $buildToolsInstallPath "VC\Tools\vcpkg\vcpkg.exe"
+    $vcpkgPath = Join-Path $buildToolsInstallPath "VC\vcpkg\vcpkg.exe"
     if(-not (Test-Path $vcpkgPath)) {
-        Write-Host "2022"
         Write-Host "VCPKG is not installed. Please install VCPKG to run this script."
         exit 1
     }
