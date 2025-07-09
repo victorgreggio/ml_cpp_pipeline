@@ -49,11 +49,11 @@ private:
     {
         switch (prediction)
         {
-        case 0:
-            return "Setosa";
         case 1:
-            return "Versicolor";
+            return "Setosa";
         case 2:
+            return "Versicolor";
+        case 3:
             return "Virginica";
         default:
             return "Unknown";
