@@ -78,5 +78,49 @@
         "CMAKE_TOOLCHAIN_FILE": "$env{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake"
       }
     }
+  ],
+  "buildPresets": [
+    {
+      "name": "VS16D",
+      "displayName": "Visual Studio 2019 - Debug",
+      "description": "Build using Visual Studio 2019 - Debug configuration",
+      "configurePreset": "VS16D"
+    },
+    {
+      "name": "VS16R",
+      "displayName": "Visual Studio 2019 - Release",
+      "description": "Build using Visual Studio 2019 - Release configuration",
+      "configurePreset": "VS16R"
+    },
+    {
+      "name": "VS17D",
+      "displayName": "Visual Studio 2022 - Debug",
+      "description": "Build using Visual Studio 2022 - Debug configuration",
+      "configurePreset": "VS17D"
+    },
+    {
+      "name": "VS17R",
+      "displayName": "Visual Studio 2022 - Release",
+      "description": "Build using Visual Studio 2022 - Release configuration",
+      "configurePreset": "VS17R"
+    },
+    {
+      "name": "NinjaD",
+      "displayName": "Ninja - Debug",
+      "description": "Build using Ninja - Debug configuration",
+      "configurePreset": "NinjaD"
+    },
+    {
+      "name": "NinjaR",
+      "displayName": "Ninja - Release",
+      "description": "Build using Ninja - Release configuration",
+      "configurePreset": "NinjaR"
+    },
+    {
+      "name": "CI",
+      "displayName": "CI - Release",
+      "description": "Build using CI configuration for continuous integration",
+      "configurePreset": "CI"
+    }
   ]
 }
