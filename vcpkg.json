@@ -3,6 +3,7 @@
     "armadillo",
     "cli11",
     "fmt",
+    "gtest",
     "highfive",
     "mlpack",
     {
