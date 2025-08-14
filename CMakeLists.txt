@@ -44,31 +44,6 @@ CPMAddPackage(
         "HIGHFIVE_USE_XTENSOR OFF"
 )
 
-# Use system packages for complex dependencies
-find_package(Threads REQUIRED)
-find_package(PostgreSQL REQUIRED)
-find_package(PkgConfig REQUIRED)
-
-# Try to find system packages first, fallback to building with CPM
-find_package(Armadillo QUIET)
-if(NOT Armadillo_FOUND)
-    message(STATUS "Armadillo not found in system, building with CPM")
-    CPMAddPackage(
-        NAME armadillo
-        GITHUB_REPOSITORY conradsnicta/armadillo-code
-        GIT_TAG 12.8.x
-        OPTIONS "BUILD_SHARED_LIBS OFF"
-    )
-endif()
-
-# For sqlpp11, try a different approach
-CPMAddPackage(
-    NAME date
-    GITHUB_REPOSITORY HowardHinnant/date
-    VERSION 3.0.1
-    OPTIONS "BUILD_TZ_LIB OFF"
-)
-
 CPMAddPackage(
     NAME sqlpp11
     GITHUB_REPOSITORY rbock/sqlpp11
@@ -81,33 +56,16 @@ CPMAddPackage(
         "USE_SQLITE3 OFF"
 )
 
-# Use system gRPC and protobuf
+# Find and use PkgConfig
+find_package(PkgConfig REQUIRED)
+
+# Use system packages for complex dependencies
 pkg_check_modules(GRPC REQUIRED grpc++ grpc)
 find_package(Protobuf REQUIRED)
-
-# For mlpack, try to use system package first
+find_package(Threads REQUIRED)
+find_package(PostgreSQL REQUIRED)
 find_package(PkgConfig REQUIRED)
 pkg_check_modules(MLPACK mlpack)
-if(NOT MLPACK_FOUND)
-    message(STATUS "MLPack not found in system, will try to build with CPM")
-    # Add dependencies for mlpack
-    find_package(LAPACK REQUIRED)
-    find_package(BLAS REQUIRED)
-    
-    CPMAddPackage(
-        NAME mlpack
-        GITHUB_REPOSITORY mlpack/mlpack
-        VERSION 4.3.0
-        OPTIONS
-            "BUILD_TESTS OFF"
-            "BUILD_CLI_EXECUTABLES OFF"
-            "BUILD_PYTHON_BINDINGS OFF"
-            "BUILD_JULIA_BINDINGS OFF"
-            "BUILD_GO_BINDINGS OFF"
-            "BUILD_R_BINDINGS OFF"
-            "BUILD_SHARED_LIBS OFF"
-    )
-endif()
 
 # Add the executable targets
 add_subdirectory(extractor)

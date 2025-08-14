@@ -21,22 +21,18 @@ jobs:
         sudo apt-get install -y \
           libhdf5-dev \
           libpq-dev \
-          ninja-build \
-          pkg-config \
           libgrpc++-dev \
-          libgrpc-dev \
-          protobuf-compiler-grpc \
-          libarmadillo-dev \
+          libprotobuf-dev \
+          libstb-dev \
           libmlpack-dev \
           libensmallen-dev \
-          liblapack-dev \
-          libblas-dev
+          protobuf-compiler
 
     - name: Install CMake 3.27 and Ninja
       uses: lukka/get-cmake@latest
 
     - name: Configure with CMake
-      run: cmake --preset CI
+      run: cmake --preset Release
 
     - name: Build
       run: cmake --build build --config Release

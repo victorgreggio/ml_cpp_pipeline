@@ -2,47 +2,7 @@
   "version": 2,
   "configurePresets": [
     {
-      "name": "VS16D",
-      "displayName": "Visual Studio 2019 - Debug",
-      "description": "Sets MSVS 2019 generator, compilers, build and install directory, debug build type",
-      "generator": "Visual Studio 16 2019",
-      "binaryDir": "${sourceDir}/build/${presetName}",
-      "cacheVariables": {
-        "CMAKE_BUILD_TYPE": "Debug"
-      }
-    },
-    {
-      "name": "VS16R",
-      "displayName": "Visual Studio 2019 - Release",
-      "description": "Sets MSVS 2019 generator, compilers, build and install directory, release build type",
-      "generator": "Visual Studio 16 2019",
-      "binaryDir": "${sourceDir}/build/${presetName}",
-      "cacheVariables": {
-        "CMAKE_BUILD_TYPE": "Release"
-      }
-    },
-    {
-      "name": "VS17D",
-      "displayName": "Visual Studio 2022 - Debug",
-      "description": "Sets MSVS 2022 generator, compilers, build and install directory, debug build type",
-      "generator": "Visual Studio 17 2022",
-      "binaryDir": "${sourceDir}/build/${presetName}",
-      "cacheVariables": {
-        "CMAKE_BUILD_TYPE": "Debug"
-      }
-    },
-    {
-      "name": "VS17R",
-      "displayName": "Visual Studio 2022 - Release",
-      "description": "Sets MSVS 2022 generator, compilers, build and install directory, release build type",
-      "generator": "Visual Studio 17 2022",
-      "binaryDir": "${sourceDir}/build/${presetName}",
-      "cacheVariables": {
-        "CMAKE_BUILD_TYPE": "Release"
-      }
-    },
-    {
-      "name": "NinjaD",
+      "name": "Debug",
       "displayName": "Ninja - Debug",
       "description": "Sets Ninja generator, compilers, build and install directory, debug build type",
       "generator": "Ninja",
@@ -52,21 +12,11 @@
       }
     },
     {
-      "name": "NinjaR",
+      "name": "Release",
       "displayName": "Ninja - Release",
-      "description": "Sets Ninja generator, compilers, build and install directory, debug build type",
+      "description": "Sets Ninja generator, compilers, build and install directory, release build type",
       "generator": "Ninja",
       "binaryDir": "${sourceDir}/build/${presetName}",
-      "cacheVariables": {
-        "CMAKE_BUILD_TYPE": "Release"
-      }
-    },
-    {
-      "name": "CI",
-      "displayName": "CI - Release",
-      "description": "Sets CI generator, compilers, build and install directory, release build type",
-      "generator": "Ninja",
-      "binaryDir": "${sourceDir}/build",
       "cacheVariables": {
         "CMAKE_BUILD_TYPE": "Release"
       }
@@ -74,46 +24,16 @@
   ],
   "buildPresets": [
     {
-      "name": "VS16D",
-      "displayName": "Visual Studio 2019 - Debug",
-      "description": "Build using Visual Studio 2019 - Debug configuration",
-      "configurePreset": "VS16D"
-    },
-    {
-      "name": "VS16R",
-      "displayName": "Visual Studio 2019 - Release",
-      "description": "Build using Visual Studio 2019 - Release configuration",
-      "configurePreset": "VS16R"
-    },
-    {
-      "name": "VS17D",
-      "displayName": "Visual Studio 2022 - Debug",
-      "description": "Build using Visual Studio 2022 - Debug configuration",
-      "configurePreset": "VS17D"
-    },
-    {
-      "name": "VS17R",
-      "displayName": "Visual Studio 2022 - Release",
-      "description": "Build using Visual Studio 2022 - Release configuration",
-      "configurePreset": "VS17R"
-    },
-    {
-      "name": "NinjaD",
+      "name": "Debug",
       "displayName": "Ninja - Debug",
       "description": "Build using Ninja - Debug configuration",
-      "configurePreset": "NinjaD"
+      "configurePreset": "Debug"
     },
     {
-      "name": "NinjaR",
+      "name": "Release",
       "displayName": "Ninja - Release",
       "description": "Build using Ninja - Release configuration",
-      "configurePreset": "NinjaR"
-    },
-    {
-      "name": "CI",
-      "displayName": "CI - Release",
-      "description": "Build using CI configuration for continuous integration",
-      "configurePreset": "CI"
+      "configurePreset": "Release"
     }
   ]
 }
