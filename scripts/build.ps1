@@ -31,38 +31,20 @@ if (-not (Test-Path $cmakePath)) {
     exit 1
 }
 
-# Define the path to the VCPKG executable
+# Determine preset name based on Visual Studio version and configuration
 if ($buildToolsVersion -ge "17.0") {
-    # For Visual Studio 2022 and later, VCPKG is included with the Build Tools
-    $vcpkgPath = Join-Path $buildToolsInstallPath "VC\vcpkg\vcpkg.exe"
-    if(-not (Test-Path $vcpkgPath)) {
-        Write-Host "VCPKG is not installed. Please install VCPKG to run this script."
-        exit 1
-    }
-
     if ($Configuration -eq "Release") {
         $presetName = "VS17R"
     } else {
         $presetName = "VS17D"
     }
 } else {
-    # For Visual Studio 2019 and earlier, check if VCPKG is in the PATH
-    $vcpkgApp = Get-Command vcpkg -ErrorAction SilentlyContinue
-    if (-not $vcpkgApp) {
-        Write-Host "VCPKG is not installed(or is not in the PATH). Please install VCPKG to run this script. https://learn.microsoft.com/en-us/vcpkg/get_started/get-started"
-        exit 1
-    }
-    $vcpkgPath = $vcpkgApp.Source
-
     if ($Configuration -eq "Release") {
         $presetName = "VS16R"
     } else {
         $presetName = "VS16D"
     }
 }
-
-# Define VCPKG_ROOT environment variable
-$env:VCPKG_ROOT = Split-Path -Path $vcpkgPath -Parent
 
 # Get the root path of the project
 $projectRoot = Split-Path -Path $PSScriptRoot -Parent
