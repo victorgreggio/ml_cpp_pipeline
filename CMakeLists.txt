@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.28)
 project(MachineLearningPipeline)
 
-set(CMAKE_CXX_STANDARD 23)
+set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
@@ -44,9 +44,9 @@ CPMAddPackage(
 )
 
 CPMAddPackage(
-    NAME sqlpp23
-    GITHUB_REPOSITORY rbock/sqlpp23
-    GIT_TAG main
+    NAME sqlpp20
+    GITHUB_REPOSITORY rbock/sqlpp20
+    GIT_TAG master
     OPTIONS
         "BUILD_TESTING OFF"
         "BUILD_POSTGRESQL_CONNECTOR ON"
