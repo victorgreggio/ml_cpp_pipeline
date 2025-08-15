@@ -27,13 +27,13 @@ CPMAddPackage("gh:fmtlib/fmt#10.2.1")
 CPMAddPackage(
     NAME CLI11
     GITHUB_REPOSITORY CLIUtils/CLI11
-    VERSION 2.5.0
+    GIT_TAG main
 )
 
 CPMAddPackage(
     NAME HighFive
     GITHUB_REPOSITORY BlueBrain/HighFive
-    VERSION 2.10.1
+    GIT_TAG main
     OPTIONS 
         "HIGHFIVE_EXAMPLES OFF"
         "HIGHFIVE_UNIT_TESTS OFF"
