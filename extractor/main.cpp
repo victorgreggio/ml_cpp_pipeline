@@ -4,6 +4,7 @@
 #include <highfive/H5File.hpp>
 #include <sqlpp23/sqlpp23.h>
 #include <sqlpp23/postgresql/postgresql.h>
+#include <sqlpp23/core/debug_logger.h>
 
 #include "iris.h"
 
@@ -49,7 +50,7 @@ int main(int argc, char *argv[])
     {
         outputPath = std::filesystem::current_path() / outputPath;
     }
-    
+
     auto outputFolderPath = outputPath;
     outputFolderPath.remove_filename();
     if (!std::filesystem::exists(outputFolderPath))
@@ -63,8 +64,9 @@ int main(int argc, char *argv[])
     config.user = user;
     config.password = password;
     config.host = host;
-    config.port = port;
-    // config.debug = true;
+#ifdef DEBUG
+    config.debug = sqlpp::debug_logger{};
+#endif
 
     try
     {
@@ -83,7 +85,7 @@ int main(int argc, char *argv[])
                 groups[specieName] = group;
             }
         }
-        
+
         for (const auto &row : connection(select(iris.id, iris.petalL, iris.petalW, iris.sepalL, iris.sepalW, iris.specie).from(iris)))
         {
             std::string specieName = std::string(row.specie.value());
