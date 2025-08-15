@@ -32,8 +32,8 @@ CPMAddPackage(
 
 CPMAddPackage(
     NAME HighFive
-    GITHUB_REPOSITORY BlueBrain/HighFive
-    GIT_TAG master
+    GITHUB_REPOSITORY highfive-devs/highfive
+    GIT_TAG main
     OPTIONS 
         "HIGHFIVE_EXAMPLES OFF"
         "HIGHFIVE_UNIT_TESTS OFF"
