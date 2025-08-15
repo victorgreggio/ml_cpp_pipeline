@@ -4,6 +4,9 @@ include(proto/grpc.cmake)
 add_executable(service 
     main.cpp)
 
+# Set C++20 for compatibility with rapidjson in MLPack
+set_property(TARGET service PROPERTY CXX_STANDARD 20)
+
 # Link the libraries
 target_link_libraries(service
     PRIVATE
@@ -27,6 +30,9 @@ endif()
 # Add the executable target
 add_executable(client 
     client.cpp)
+
+# Set C++20 for compatibility with rapidjson in MLPack (if used)
+set_property(TARGET client PROPERTY CXX_STANDARD 20)
 
 # Link the libraries
 target_link_libraries(client

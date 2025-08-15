@@ -2,9 +2,8 @@
 #include <highfive/H5DataSet.hpp>
 #include <highfive/H5DataSpace.hpp>
 #include <highfive/H5File.hpp>
-#include <sqlpp23/sqlpp23.h>
-#include <sqlpp23/postgresql/postgresql.h>
-#include <sqlpp23/core/debug_logger.h>
+#include <sqlpp20/postgresql/connection.h>
+#include <sqlpp20/postgresql/connection_config.h>
 
 #include "iris.h"
 
@@ -59,20 +58,20 @@ int main(int argc, char *argv[])
         return EXIT_FAILURE;
     }
 
-    sqlpp::postgresql::connection_config config;
+    sqlpp::postgresql::connection_config_t config;
     config.dbname = dbname;
     config.user = user;
     config.password = password;
     config.host = host;
 #ifdef DEBUG
-    config.debug = sqlpp::debug_logger{};
+    config.debug = [](std::string_view msg) { std::cerr << msg << std::endl; };
 #endif
 
     try
     {
         HighFive::File file(outputPath.string(), HighFive::File::ReadWrite | HighFive::File::Create | HighFive::File::Truncate);
 
-        sqlpp::postgresql::connection connection(config);
+        sqlpp::postgresql::connection_t<> connection(config);
 
         iris::Iris iris{};
         std::map<std::string, HighFive::Group> groups;

@@ -1,6 +1,9 @@
 # Add the executable target
 add_executable(trainer main.cpp)
 
+# Set C++20 for compatibility with rapidjson in MLPack
+set_property(TARGET trainer PROPERTY CXX_STANDARD 20)
+
 # Link the libraries
 target_link_libraries(trainer
     PRIVATE
