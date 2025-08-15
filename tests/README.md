@@ -29,32 +29,33 @@ Tests the species name conversion logic from the classifier service:
 ## Running Tests
 
 ### Prerequisites
-- Google Test framework (installed via system package manager or vcpkg)
-- CMake 3.20+
-- C++17 compatible compiler
+- Google Test framework (automatically downloaded via CPM)
+- CMake 3.28+
+- C++23 compatible compiler
 
 ### Build and Run Tests
 
-#### Option 1: As part of main build (if vcpkg dependencies are working)
+#### Standard build with tests enabled (default)
 ```bash
 cmake --preset CI
 cmake --build build --config Release
 ctest --test-dir build --verbose
 ```
 
-#### Option 2: Tests only (when main dependencies have issues)
+#### Disable tests if needed
+```bash
+cmake -DBUILD_TESTS=OFF --preset CI
+cmake --build build --config Release
+```
+
+#### Manual test-only build
 ```bash
 # Create test-only build
 mkdir build_tests
 cd build_tests
 
-# Copy simplified CMakeLists and required headers
-cp ../CMakeLists_tests_only.txt CMakeLists.txt
-cp -r ../tests .
-cp -r ../wrangler .
-
-# Configure and build
-cmake .
+# Configure with just test dependencies
+cmake -DBUILD_TESTS=ON ..
 cmake --build .
 
 # Run tests
@@ -66,11 +67,10 @@ ctest --verbose
 ```
 
 ### Test Configuration
-Tests are automatically discovered and can be disabled by setting `-DBUILD_TESTS=OFF` during CMake configuration.
+Tests are automatically enabled when BUILD_TESTS=ON (default) and use Google Test via CPM (CMake Package Manager). The test framework automatically downloads and builds Google Test as part of the build process.
 
-The test framework tries to find Google Test through:
-1. pkg-config (system installation)
-2. CMake find_package (vcpkg or other installations)
+### Dependency Management
+The project now uses **CPM (CMake Package Manager)** instead of vcpkg for dependency management. Google Test is automatically downloaded and configured during the cmake configuration step.
 
 ### Test Coverage
 These tests focus on:
