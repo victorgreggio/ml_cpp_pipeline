@@ -46,15 +46,15 @@ CPMAddPackage(
 )
 
 CPMAddPackage(
-    NAME sqlpp11
-    GITHUB_REPOSITORY rbock/sqlpp11
+    NAME sqlpp23
+    GITHUB_REPOSITORY rbock/sqlpp23
     GIT_TAG main
     OPTIONS
         "BUILD_TESTING OFF"
-        "SQLPP11_TESTS OFF"
-        "USE_MARIADB OFF"
-        "USE_MYSQL OFF"
-        "USE_SQLITE3 OFF"
+        "BUILD_POSTGRESQL_CONNECTOR ON"
+        "BUILD_MYSQL_CONNECTOR OFF"
+        "BUILD_MARIADB_CONNECTOR OFF"
+        "BUILD_SQLITE3_CONNECTOR OFF"
 )
 
 # Find and use PkgConfig
