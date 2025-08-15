@@ -7,13 +7,11 @@ add_executable(service
 # Link the libraries
 target_link_libraries(service
     PRIVATE
-    fmt::fmt
-    CLI11::CLI11
-    ${GRPC_LIBRARIES}
-    grpc++_reflection
     iris_grpc_proto
-    armadillo
+    CLI11::CLI11
     protobuf::libprotobuf
+    grpc++_reflection    
+    ${GRPC_LIBRARIES}
 )
 
 target_include_directories(service PRIVATE ${GRPC_INCLUDE_DIRS})
@@ -33,12 +31,11 @@ add_executable(client
 # Link the libraries
 target_link_libraries(client
     PRIVATE
-    fmt::fmt
-    CLI11::CLI11
-    ${GRPC_LIBRARIES}
-    grpc++_reflection
     iris_grpc_proto
+    CLI11::CLI11
     protobuf::libprotobuf
+    grpc++_reflection
+    ${GRPC_LIBRARIES}
 )
 
 target_include_directories(client PRIVATE ${GRPC_INCLUDE_DIRS})

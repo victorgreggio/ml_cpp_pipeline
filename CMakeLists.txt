@@ -1,7 +1,7 @@
-cmake_minimum_required(VERSION 3.20)
+cmake_minimum_required(VERSION 3.28)
 project(MachineLearningPipeline)
 
-set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
@@ -22,12 +22,13 @@ file(DOWNLOAD
 include(${CMAKE_CURRENT_BINARY_DIR}/cmake/CPM.cmake)
 
 # Add lightweight dependencies using CPM
-CPMAddPackage("gh:fmtlib/fmt#10.2.1")
-
 CPMAddPackage(
     NAME CLI11
     GITHUB_REPOSITORY CLIUtils/CLI11
     GIT_TAG main
+    OPTIONS
+      "CLI11_BUILD_EXAMPLES OFF" 
+      "CLI11_BUILD_TESTS OFF"
 )
 
 CPMAddPackage(

@@ -26,7 +26,8 @@ jobs:
           libstb-dev \
           libmlpack-dev \
           libensmallen-dev \
-          protobuf-compiler
+          protobuf-compiler \
+          protobuf-compiler-grpc
 
     - name: Install CMake 3.27 and Ninja
       uses: lukka/get-cmake@latest
@@ -35,5 +36,5 @@ jobs:
       run: cmake --preset Release
 
     - name: Build
-      run: cmake --build build --preset Release
+      run: cmake --build --preset Release
     
