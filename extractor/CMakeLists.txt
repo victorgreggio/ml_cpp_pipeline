@@ -7,5 +7,5 @@ target_link_libraries(extractor
     PRIVATE
     CLI11::CLI11
     HighFive
-    sqlpp11::sqlpp11
+    sqlpp23::sqlpp23
     PostgreSQL::PostgreSQL)

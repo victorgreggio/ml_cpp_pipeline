@@ -2,8 +2,9 @@
 #include <highfive/H5DataSet.hpp>
 #include <highfive/H5DataSpace.hpp>
 #include <highfive/H5File.hpp>
-#include <sqlpp11/sqlpp11.h>
-#include <sqlpp11/postgresql/postgresql.h>
+#include <sqlpp23/sqlpp23.h>
+#include <sqlpp23/postgresql/postgresql.h>
+#include <sqlpp23/core/debug_logger.h>
 
 #include "iris.h"
 
@@ -63,20 +64,21 @@ int main(int argc, char *argv[])
     config.user = user;
     config.password = password;
     config.host = host;
-    
-    auto config_ptr = std::make_shared<sqlpp::postgresql::connection_config>(config);
+#ifdef DEBUG
+    config.debug = sqlpp::debug_logger{};
+#endif
 
     try
     {
         HighFive::File file(outputPath.string(), HighFive::File::ReadWrite | HighFive::File::Create | HighFive::File::Truncate);
 
-        sqlpp::postgresql::connection connection(config_ptr);
+        sqlpp::postgresql::connection connection(config);
 
         iris::Iris iris{};
         std::map<std::string, HighFive::Group> groups;
-        for (const auto &specie : connection(select(iris.specie).group_by(iris.specie).from(iris).unconditionally()))
+        for (const auto &specie : connection(select(iris.specie).group_by(iris.specie).from(iris)))
         {
-            std::string specieName = std::string(specie.specie);
+            std::string specieName = std::string(specie.specie.value());
             if (groups.find(specieName) == groups.end())
             {
                 auto group = file.createGroup(specieName);
@@ -84,17 +86,13 @@ int main(int argc, char *argv[])
             }
         }
 
-        for (const auto &row : connection(select(iris.id, iris.petalL, iris.petalW, iris.sepalL, iris.sepalW, iris.specie).from(iris).unconditionally()))
+        for (const auto &row : connection(select(iris.id, iris.petalL, iris.petalW, iris.sepalL, iris.sepalW, iris.specie).from(iris)))
         {
-            std::string specieName = std::string(row.specie);
+            std::string specieName = std::string(row.specie.value());
             auto &group = groups[specieName];
 
             std::string dataSetname = "measurement_" + std::to_string(row.id);
-            std::vector<double> measurements;
-            measurements.push_back(static_cast<double>(row.petalL));
-            measurements.push_back(static_cast<double>(row.petalW));  
-            measurements.push_back(static_cast<double>(row.sepalL));
-            measurements.push_back(static_cast<double>(row.sepalW));
+            std::vector<double> measurements{row.petalL.value(), row.petalW.value(), row.sepalL.value(), row.sepalW.value()};
             std::vector<size_t> dims{measurements.size()};
 
             auto dataSet = group.createDataSet<double>(dataSetname, HighFive::DataSpace(dims));
