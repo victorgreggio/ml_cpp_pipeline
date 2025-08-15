@@ -1,4 +1,4 @@
-#include <format>
+#include <sstream>
 #include <CLI/CLI.hpp>
 #include <grpcpp/grpcpp.h>
 #include <grpcpp/ext/proto_server_reflection_plugin.h>
@@ -8,7 +8,9 @@
 
 void RunServer(uint16_t port, std::filesystem::path modelFilePath)
 {
-    std::string server_address = std::format("0.0.0.0:{}", port);
+    std::stringstream ss;
+    ss << "0.0.0.0:" << port;
+    std::string server_address = ss.str();
     IrisClassifierService service(modelFilePath);
 
     grpc::EnableDefaultHealthCheckService(true);
