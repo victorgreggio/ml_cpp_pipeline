@@ -1,20 +1,6 @@
- message(STATUS "Using protobuf ${Protobuf_VERSION}")
- message(STATUS "Using gRPC ${gRPC_VERSION}")
-
-set(_PROTOBUF_LIBPROTOBUF protobuf::libprotobuf)
-set(_REFLECTION gRPC::grpc++_reflection)
-if(CMAKE_CROSSCOMPILING)
-    find_program(_PROTOBUF_PROTOC protoc)
-else()
-    set(_PROTOBUF_PROTOC $<TARGET_FILE:protobuf::protoc>)
-endif()
-
-set(_GRPC_GRPCPP gRPC::grpc++)
-if(CMAKE_CROSSCOMPILING)
-    find_program(_GRPC_CPP_PLUGIN_EXECUTABLE grpc_cpp_plugin)
-else()
-    set(_GRPC_CPP_PLUGIN_EXECUTABLE $<TARGET_FILE:gRPC::grpc_cpp_plugin>)
-endif()
+# Use system protobuf and gRPC
+find_program(_PROTOBUF_PROTOC protoc)
+find_program(_GRPC_CPP_PLUGIN_EXECUTABLE grpc_cpp_plugin)
 
 # Proto file
 get_filename_component(iris_proto "proto/iris.proto" ABSOLUTE)
@@ -44,8 +30,13 @@ add_library(iris_grpc_proto
   ${iris_grpc_hdrs}
   ${iris_proto_srcs}
   ${iris_proto_hdrs})
+
+# Link with system protobuf library
 target_link_libraries(iris_grpc_proto
-  absl::check
-  ${_REFLECTION}
-  ${_GRPC_GRPCPP}
-  ${_PROTOBUF_LIBPROTOBUF})
+  protobuf::libprotobuf
+  ${GRPC_LIBRARIES}
+  grpc++_reflection
+)
+
+target_include_directories(iris_grpc_proto PRIVATE ${GRPC_INCLUDE_DIRS})
+target_compile_options(iris_grpc_proto PRIVATE ${GRPC_CFLAGS_OTHER})

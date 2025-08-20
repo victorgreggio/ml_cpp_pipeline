@@ -8,22 +8,26 @@ on:
 
 jobs:
   build:
-
-    runs-on: ubuntu-latest
-
+    runs-on: fedora-latest
     steps:
     - name: Checkout repository
       uses: actions/checkout@v4
 
+    - name: Install system dependencies
+      run: |
+        sudo dnf -y update
+        sudo dnf -y install \
+          hdf5-devel \
+          libpq-devel \
+          grpc-devel \
+          mlpack-devel
+
     - name: Install CMake 3.27 and Ninja
       uses: lukka/get-cmake@latest
 
-    - name: Setup anew (or from cache) vcpkg (and does not build any package)
-      uses: lukka/run-vcpkg@v11
+    - name: Configure with CMake
+      run: cmake --preset Release
 
-    - name: Run CMake consuming CMakePreset.json and run vcpkg to build packages
-      uses: lukka/run-cmake@v10
-      with:
-        configurePreset: 'CI'
-        buildPreset: 'CI'
+    - name: Build
+      run: cmake --build --preset Release
     

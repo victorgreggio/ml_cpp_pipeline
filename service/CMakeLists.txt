@@ -4,25 +4,25 @@ include(proto/grpc.cmake)
 add_executable(service 
     main.cpp)
 
-target_include_directories(service 
-    PRIVATE 
-    ${MLPACK_INCLUDE_DIRS}
-    ${ARMADILLO_INCLUDE_DIRS}
-)
-
 # Link the libraries
 target_link_libraries(service
     PRIVATE
-    fmt::fmt
-    CLI11::CLI11
-    gRPC::gpr 
-    gRPC::grpc 
-    gRPC::grpc++ 
-    gRPC::grpc++_alts
     iris_grpc_proto
-    ${ARMADILLO_LIBRARIES}
+    CLI11::CLI11
+    protobuf::libprotobuf
+    grpc++_reflection    
+    ${GRPC_LIBRARIES}
 )
 
+target_include_directories(service PRIVATE ${GRPC_INCLUDE_DIRS})
+target_compile_options(service PRIVATE ${GRPC_CFLAGS_OTHER})
+
+# Add mlpack compile flags if found via pkg-config
+if(MLPACK_FOUND)
+    target_include_directories(service PRIVATE ${MLPACK_INCLUDE_DIRS})
+    target_compile_options(service PRIVATE ${MLPACK_CFLAGS_OTHER})
+    target_link_libraries(service PRIVATE ${MLPACK_LIBRARIES})
+endif()
 
 # Add the executable target
 add_executable(client 
@@ -31,11 +31,12 @@ add_executable(client
 # Link the libraries
 target_link_libraries(client
     PRIVATE
-    fmt::fmt
-    CLI11::CLI11
-    gRPC::gpr 
-    gRPC::grpc 
-    gRPC::grpc++ 
-    gRPC::grpc++_alts
     iris_grpc_proto
+    CLI11::CLI11
+    protobuf::libprotobuf
+    grpc++_reflection
+    ${GRPC_LIBRARIES}
 )
+
+target_include_directories(client PRIVATE ${GRPC_INCLUDE_DIRS})
+target_compile_options(client PRIVATE ${GRPC_CFLAGS_OTHER})

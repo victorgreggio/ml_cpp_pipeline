@@ -1,6 +1,6 @@
 #include <iostream>
 
-#include <fmt/format.h>
+#include <format>
 #include <CLI/CLI.hpp>
 #include <grpcpp/grpcpp.h>
 
@@ -46,7 +46,7 @@ int main(int argc, char* argv[]) {
 
     CLI11_PARSE(app, argc, argv);
 
-    std::string server_address = fmt::format("{}:{}", hostname, port);
+    std::string server_address = std::format("{}:{}", hostname, port);
     IrisClassifierClient client(server_address);
 
     iris::ClassifyRequest request;

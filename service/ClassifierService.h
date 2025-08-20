@@ -20,7 +20,7 @@ public:
 
     ~IrisClassifierService() override = default;
 
-    grpc::Status Classify(grpc::ServerContext *context, const iris::ClassifyRequest *request, iris::ClassifyResponse *response) override
+    grpc::Status Classify(grpc::ServerContext* /*context*/, const iris::ClassifyRequest *request, iris::ClassifyResponse *response) override
     {
         arma::dmat inputData(4, 1);
         inputData(0, 0) = request->petallength();

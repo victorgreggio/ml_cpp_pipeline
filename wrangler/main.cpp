@@ -51,7 +51,7 @@ int main(int argc, char *argv[])
         std::vector<Iris> irisData;
 
         HighFive::File inputFile(inputPath.string(), HighFive::File::ReadOnly);
-        auto &species = inputFile.listObjectNames();
+        auto species = inputFile.listObjectNames();
         for (const auto &specie : species)
         {
             auto group = inputFile.getGroup(specie);
