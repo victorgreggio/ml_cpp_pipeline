@@ -8,26 +8,19 @@ on:
 
 jobs:
   build:
-
-    runs-on: ubuntu-latest
-
+    runs-on: fedora-latest
     steps:
     - name: Checkout repository
       uses: actions/checkout@v4
 
     - name: Install system dependencies
       run: |
-        sudo apt-get update
-        sudo apt-get install -y \
-          libhdf5-dev \
-          libpq-dev \
-          libgrpc++-dev \
-          libprotobuf-dev \
-          libstb-dev \
-          libmlpack-dev \
-          libensmallen-dev \
-          protobuf-compiler \
-          protobuf-compiler-grpc
+        sudo dnf -y update
+        sudo dnf -y install \
+          hdf5-devel \
+          libpq-devel \
+          grpc-devel \
+          mlpack-devel
 
     - name: Install CMake 3.27 and Ninja
       uses: lukka/get-cmake@latest

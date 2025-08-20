@@ -5,7 +5,7 @@ set -e
 PRESET="Debug"
 
 # Use Debug preset for Linux
-cmake --preset $PRESET
-cmake --build build --config $PRESET
+(cd ".." && cmake --preset $PRESET)
+(cd ".." && cmake --build build --preset $PRESET)
 
 echo "Build completed."

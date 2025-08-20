@@ -43,7 +43,7 @@ public:
     }
 
 private:
-    mlpack::SoftmaxRegression m_smr;
+    mlpack::SoftmaxRegression<arma::dmat> m_smr;
 
     inline std::string getSpecieName(size_t prediction)
     {

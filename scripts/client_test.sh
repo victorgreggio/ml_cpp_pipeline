@@ -2,8 +2,6 @@
 # Bash script to test gRPC service client
 set -e
 
-PRESET="CI"
-CONFIG="Release"
-BUILD_DIR="build/$PRESET"
+PRESET="Debug"
 
-$BUILD_DIR/service/$CONFIG/client -p 50051
+(cd ".." && build/$PRESET/service/client -p 50051)

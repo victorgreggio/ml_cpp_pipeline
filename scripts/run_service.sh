@@ -2,15 +2,19 @@
 # Bash script to run the full ML pipeline and start gRPC service
 set -e
 
+HOST_ARG="$1"
+if [ -z "$HOST_ARG" ]; then
+	HOST_ARG="localhost"
+fi
+
 PRESET="Debug"
-BUILD_DIR="build/$PRESET"
 DATA_DIR="data"
 
 # Step 1: Extract data
-$BUILD_DIR/extractor/extractor -o $DATA_DIR/output.hdf
+(cd ".." && build/$PRESET/extractor/extractor -H "$HOST_ARG" -o $DATA_DIR/output.hdf)
 # Step 2: Wrangle data
-$BUILD_DIR/wrangler/wrangler -i $DATA_DIR/output.hdf -o $DATA_DIR/output.csv
+(cd ".." && build/$PRESET/wrangler/wrangler -i $DATA_DIR/output.hdf -o $DATA_DIR/output.csv)
 # Step 3: Train model
-$BUILD_DIR/trainer/trainer -i $DATA_DIR/output.csv -o $DATA_DIR/output.xml
+(cd ".." && build/$PRESET/trainer/trainer -i $DATA_DIR/output.csv -o $DATA_DIR/output.xml)
 # Step 4: Start gRPC service
-$BUILD_DIR/service/service -i $DATA_DIR/output.xml
+(cd ".." && build/$PRESET/service/service -i $DATA_DIR/output.xml)
