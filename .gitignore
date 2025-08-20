@@ -12,8 +12,6 @@ CTestTestfile.cmake
 _deps
 CMakeUserPresets.json
 build
-build_tests
-build_simple
 
 # Prerequisites
 *.d
@@ -53,8 +51,6 @@ build_simple
 *.exe
 *.out
 *.app
-*_test
-*Test
 
 # debug information files
 *.dwo
@@ -68,6 +64,3 @@ data/*.csv
 data/*.hdf
 data/*.json
 data/*.xml
-
-# Test artifacts and temporary files
-CMakeLists_tests_only.txt
