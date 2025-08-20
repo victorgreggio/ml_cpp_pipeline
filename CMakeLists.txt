@@ -19,6 +19,9 @@ file(DOWNLOAD
 )
 include(${CMAKE_CURRENT_BINARY_DIR}/cmake/CPM.cmake)
 
+# Option to build tests - enabled by default
+option(BUILD_TESTS "Build unit tests" ON)
+
 # Add lightweight dependencies using CPM
 CPMAddPackage(
     NAME CLI11
@@ -54,6 +57,25 @@ CPMAddPackage(
         "BUILD_MARIADB_CONNECTOR OFF"
         "BUILD_SQLITE3_CONNECTOR OFF"
 )
+
+# Add GTest for unit testing
+if(BUILD_TESTS)
+    CPMAddPackage(
+        NAME googletest
+        GITHUB_REPOSITORY google/googletest
+        GIT_TAG main
+        OPTIONS
+            "BUILD_GMOCK OFF"
+            "INSTALL_GTEST OFF"
+    )
+    if(googletest_ADDED)
+        enable_testing()
+        add_subdirectory(tests)
+        message(STATUS "Unit tests enabled via CPM")
+    else()
+        message(STATUS "GTest not available, tests disabled")
+    endif()
+endif()
 
 # Find and use PkgConfig
 find_package(PkgConfig REQUIRED)
