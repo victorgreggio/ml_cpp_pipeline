@@ -19,6 +19,7 @@ jobs:
       run: |
         sudo dnf -y update
         sudo dnf -y install \
+          git \
           gcc-c++ \
           cmake \
           ninja-build \
