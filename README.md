@@ -63,11 +63,42 @@ This project showcases a simple end-to-end machine learning pipeline using C++ t
 These steps will walk you through configuring your local machine to build and run the project.
 
 ### Prerequisites
-* [Visual Studio Build Tools](https://aka.ms/vs/17/release/vs_BuildTools.exe)
+
+#### System Packages
+
+**For Fedora/CentOS/RHEL:**
+```bash
+sudo dnf install -y \
+  git \
+  gcc-c++ \
+  cmake \
+  ninja-build \
+  hdf5-devel \
+  libpq-devel \
+  grpc-devel \
+  mlpack-devel
+```
+
+**For Ubuntu/Debian:**
+```bash
+sudo apt update
+sudo apt install -y \
+  git \
+  g++ \
+  cmake \
+  ninja-build \
+  libhdf5-dev \
+  libpq-dev \
+  libgrpc-dev \
+  libgrpc++-dev \
+  libmlpack-dev
+```
+
+#### Database Setup
 * [PostgreSQL](https://www.postgresql.org/download/)
   1. Download and install PostgreSQL.
-  2. Using postgres or other admin account execute the script ```data\db.sql```
-  3. Login using iris user and execute the other two scripts: ```data\ddl.sql``` and ```data\dml.sql```
+  2. Using postgres or other admin account execute the script ```data/db.sql```
+  3. Login using iris user and execute the other two scripts: ```data/ddl.sql``` and ```data/dml.sql```
 
 ### Steps
 
@@ -76,11 +107,17 @@ These steps will walk you through configuring your local machine to build and ru
    git clone https://github.com/victorgreggio/ml_cpp_pipeline.git
    ```
 2. Build
-   ```scripts\build.ps1```
-4. Run service
-   ```scripts\run_service.ps1```
-5. Run client
-   ```build\{presetName}\service\{configuration}\client.exe```
+   ```bash
+   scripts/build.sh
+   ```
+3. Run service
+   ```bash
+   scripts/run_service.sh
+   ```
+4. Run client
+   ```bash
+   build/Debug/service/client
+   ```
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
