@@ -66,6 +66,8 @@ These steps will walk you through configuring your local machine to build and ru
 
 #### System Packages
 
+> **Note**: The following instructions have been tested on Fedora42 and Debian Trixie (testing). For older versions, some package names or versions might differ.
+
 **For Fedora/CentOS/RHEL:**
 ```bash
 sudo dnf install -y \
@@ -91,7 +93,11 @@ sudo apt install -y \
   libpq-dev \
   libgrpc-dev \
   libgrpc++-dev \
-  libmlpack-dev
+  libprotobuf-dev \
+  protobuf-compiler \
+  protobuf-compiler-grpc \
+  libmlpack-dev \
+  libstb-dev
 ```
 
 #### Database Setup
@@ -118,6 +124,20 @@ sudo apt install -y \
    ```bash
    build/Debug/service/client
    ```
+
+### Troubleshooting
+
+#### MLPack STB Headers Issue (Ubuntu/Debian)
+If you encounter an error like `fatal error: bundled/stb_image.h: No such file or directory` during compilation, this is due to MLPack's STB header detection mechanism not working properly. To fix this, create symbolic links to the system STB headers:
+
+```bash
+sudo mkdir -p /usr/include/mlpack/core/stb/bundled
+sudo ln -sf /usr/include/stb/stb_image.h /usr/include/mlpack/core/stb/bundled/stb_image.h
+sudo ln -sf /usr/include/stb/stb_image_write.h /usr/include/mlpack/core/stb/bundled/stb_image_write.h
+sudo ln -sf /usr/include/stb/stb_image_resize2.h /usr/include/mlpack/core/stb/bundled/stb_image_resize2.h
+```
+
+This creates the expected directory structure that MLPack looks for when its automatic system header detection fails.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
