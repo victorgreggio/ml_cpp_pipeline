@@ -85,8 +85,23 @@ pkg_check_modules(GRPC REQUIRED grpc++ grpc)
 find_package(Protobuf REQUIRED)
 find_package(Threads REQUIRED)
 find_package(PostgreSQL REQUIRED)
-find_package(PkgConfig REQUIRED)
 pkg_check_modules(MLPACK mlpack)
+
+# Verify that pkg-config returned usable include directories for mlpack.
+# Some distro pkg-config files can point to build-time paths
+if(MLPACK_FOUND)
+    set(_mlpack_valid TRUE)
+    foreach(_inc_dir IN LISTS MLPACK_INCLUDE_DIRS)
+        if(NOT IS_DIRECTORY "${_inc_dir}")
+            set(_mlpack_valid FALSE)
+        elseif(_inc_dir MATCHES "^/builddir/")
+            set(_mlpack_valid FALSE)
+        endif()
+    endforeach()
+    if(NOT _mlpack_valid)
+        set(MLPACK_FOUND OFF CACHE BOOL "")
+    endif()
+endif()
 
 # Add the executable targets
 add_subdirectory(extractor)

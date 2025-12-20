@@ -19,9 +19,17 @@ target_compile_options(service PRIVATE ${GRPC_CFLAGS_OTHER})
 
 # Add mlpack compile flags if found via pkg-config
 if(MLPACK_FOUND)
-    target_include_directories(service PRIVATE ${MLPACK_INCLUDE_DIRS})
-    target_compile_options(service PRIVATE ${MLPACK_CFLAGS_OTHER})
-    target_link_libraries(service PRIVATE ${MLPACK_LIBRARIES})
+    set(_mlpack_valid_includes)
+    foreach(_inc IN LISTS MLPACK_INCLUDE_DIRS)
+        if(IS_DIRECTORY "${_inc}" AND NOT _inc MATCHES "^/builddir/")
+            list(APPEND _mlpack_valid_includes "${_inc}")
+        endif()
+    endforeach()
+    if(_mlpack_valid_includes)
+        target_include_directories(service PRIVATE ${_mlpack_valid_includes})
+        target_compile_options(service PRIVATE ${MLPACK_CFLAGS_OTHER})
+        target_link_libraries(service PRIVATE ${MLPACK_LIBRARIES})
+    endif()
 endif()
 
 # Add the executable target
